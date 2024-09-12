@@ -31,7 +31,7 @@ passport.use(
   new SteamStrategy(
     {
       returnURL: process.env.CALLBACK_URL,
-      realm: "http://localhost:5173/",
+      realm: "https://rusttrade.vercel.app/",
       apiKey: process.env.STEAM_API_KEY,
     },
     (identifier, profile, done) => {
@@ -53,11 +53,11 @@ app.get(
   "/auth/steam/return",
   passport.authenticate("steam", { failureRedirect: "/" }),
   (req, res) => {
-    res.redirect("/auth/steam/return");
+    res.redirect("/profile");
   }
 );
 
-app.get("/auth/steam/return", (req, res) => {
+app.get("/profile", (req, res) => {
   if (!req.isAuthenticated()) {
     return res.redirect("/");
   }
